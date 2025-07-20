@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitruva Fitness Newsline</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #2997ff;
+      --accent2: #0071e3;
+      --bg: #000;
+      --text: #fff;
+      --card-bg: #161617;
+      --card-border: #222326;
+      --section-bg: #161617;
+      --shadow: none;
+      --radius: 18px;
+      --font: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    }
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 18px;
+      margin: 0;
+      padding: 0;
+      letter-spacing: 0.01em;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    header {
+      background: var(--bg);
+      border-bottom: 1.5px solid var(--card-border);
+      padding: 1.2rem 0 0.7rem 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+    }
+    .brand {
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: 2px;
+      margin-bottom: 0.2rem;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1rem;
+      font-size: 1.08rem;
+      margin-bottom: 0.2rem;
+    }
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.2rem 0.7rem;
+      border-radius: 8px;
+      transition: background 0.15s, color 0.15s;
+    }
+    nav a.active, nav a:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    .toggle-dark {
+      display: none;
+    }
+    .hero {
+      background: var(--section-bg);
+      border-radius: var(--radius);
+      margin: 2.5rem 0 2rem 0;
+      padding: 3.5rem 2rem 3.5rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      align-items: center;
+      box-shadow: var(--shadow);
+      justify-content: center;
+      text-align: center;
+    }
+    .hero-content {
+      flex: 1 1 100%;
+      min-width: 260px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero-title {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+    .hero-desc {
+      font-size: 1.3rem;
+      color: #b0b8c1;
+      margin-bottom: 2.2rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-btn {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      padding: 1rem 2.8rem;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+      transition: background 0.15s;
+      box-shadow: 0 2px 8px #2997ff33;
+    }
+    .cta-btn:hover {
+      background: var(--accent2);
+    }
+    .hero-content img.person-workout {
+      margin-top: 2.5rem;
+      width: 100%;
+      max-width: 380px;
+      border-radius: 18px;
+      box-shadow: 0 2px 16px #2997ff22;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      object-fit: cover;
+      aspect-ratio: 4/3;
+    }
+    .section {
+      background: var(--section-bg);
+      border-radius: var(--radius);
+      margin: 2.5rem 0 2rem 0;
+      padding: 2.2rem 1.5rem 2.2rem 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem 1.5rem 2rem 1.5rem;
+      min-width: 220px;
+      max-width: 420px;
+      flex: 1 1 320px;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+      text-align: center;
+    }
+    .card img {
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      width: 100%;
+      max-width: 320px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: none;
+    }
+    .card-details, .list-placeholder, .video-placeholder, .chart-placeholder {
+      font-size: 1.15rem;
+      color: #b0b8c1;
+      margin-bottom: 0.7rem;
+    }
+    .editable-list {
+      padding-left: 1.2rem;
+      font-size: 1.05rem;
+      color: #b0b8c1;
+    }
+    .stats, .quick-tools, .tip-section, .achievements, .settings, #blog, #dailynews, #success, #expert {
+      display: none !important;
+    }
+    /* Personal Details Form Fixes */
+    #profile-form label {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.7rem;
+    }
+    #profile-form input, #profile-form select {
+      background: #000;
+      color: #fff;
+      border: 1.5px solid #222326;
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+      font-size: 1.1rem;
+      margin-top: 0.2rem;
+      margin-bottom: 1.2rem;
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #profile-form input:focus, #profile-form select:focus {
+      border-color: var(--accent);
+    }
+    #profile-form button {
+      margin-top: 1rem;
+    }
+    #profile-summary, #calorie-result {
+      color: #fff !important;
+    }
+    /* Info/newsletter page */
+    #info {
+      background: var(--card-bg) !important;
+      color: var(--text) !important;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 3rem 0 0 0;
+      max-width: 1600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #info .section-title {
+      color: var(--accent) !important;
+      text-align: center;
+    }
+    #info form input[type="email"] {
+      border: 1.5px solid var(--accent);
+      border-radius: 8px 0 0 8px;
+      font-size: 1.1rem;
+      padding: 1rem 1.2rem;
+      outline: none;
+      background: #000;
+      color: #fff;
+    }
+    #info form button[type="submit"] {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.2rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    #info form button[type="submit"]:hover {
+      background: var(--accent2);
+      color: #fff;
+    }
+    #info a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    #info .section-title.prominent {
+      color: var(--accent) !important;
+    }
+    #info .card {
+      background: #161617;
+      border: 1.5px solid #222326;
+      color: var(--text);
+    }
+    #info .card img {
+      box-shadow: none;
+    }
+    #info .card-details {
+      color: #b0b8c1;
+    }
+    #info .footer {
+      background: #111216;
+      color: #fff;
+      padding: 2.5rem 0 1.5rem 0;
+      text-align: center;
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+    /* Remove all gradients and shadows */
+    [style*="linear-gradient"], [style*="box-shadow"] {
+      background: var(--card-bg) !important;
+      box-shadow: none !important;
+    }
+    /* Responsive tweaks */
+    @media (max-width: 900px) {
+      .container { padding: 0 0.5rem; }
+      .card-grid { gap: 1.2rem; }
+      .section, .hero { padding: 1.2rem 0.5rem; }
+      #info > div[style*="max-width:1200px"] {
+        flex-direction: column;
+        gap: 2rem;
+        max-width: 100vw !important;
+        padding: 0 0.5rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero, .section { flex-direction: column; gap: 1.2rem; }
+      .card-grid { flex-direction: column; gap: 1.2rem; }
+      .hero-title {
+        font-size: 1.5rem;
+      }
+      .hero-desc {
+        font-size: 0.98rem;
+      }
+      .cta-btn {
+        font-size: 0.95rem;
+        padding: 0.7rem 1.1rem;
+      }
+      .section-title {
+        font-size: 1.1rem;
+      }
+      .card {
+        padding: 1rem 0.5rem;
+      }
+      #info > div[style*="max-width:1200px"] {
+        flex-direction: column;
+        gap: 1.2rem;
+        max-width: 100vw !important;
+        padding: 0 0.3rem;
+      }
+      #info form {
+        flex-direction: column;
+        max-width: 100%;
+      }
+      #info form input[type="email"], #info form button[type="submit"] {
+        border-radius: 8px !important;
+        width: 100%;
+        margin-bottom: 0.7rem;
+      }
+      #info .section-title, #info h2 {
+        font-size: 1.2rem !important;
+      }
+      #info h3 {
+        font-size: 1rem !important;
+      }
+      #info ul, #info p, #info div {
+        font-size: 0.98rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">Vitruva</div>
+      <nav>
+        <a href="#home" class="active">Home</a>
+        <a href="#profile">Profile</a>
+        <a href="#calorie">Calorie Tracker</a>
+        <a href="#nutrition">Nutrition</a>
+        <a href="#info">Info</a>
+      </nav>
+    </header>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="hero-title">Smarter Fitness. Inspired by Apple.</div>
+        <div class="hero-desc">Welcome to Vitruva – a premium, simple, and beautiful fitness dashboard. Track your health, calories, and nutrition with an Apple-inspired design.</div>
+        <button class="cta-btn">Get Started</button>
+      </div>
+    </section>
+    <section class="section" id="profile">
+      <div class="section-title">Personal Details</div>
+      <div class="card-grid">
+        <div class="card" style="max-width:420px;">
+          <form id="profile-form" autocomplete="off" style="display:flex;flex-direction:column;gap:1.2rem;max-width:420px;">
+            <label>Name <input type="text" id="userName" placeholder="Your name"></label>
+            <label>Age <input type="number" id="userAge" placeholder="Age" min="1" max="120"></label>
+            <label>Weight (kg) <input type="number" id="userWeight" placeholder="Weight" min="1" max="300"></label>
+            <label>Height (cm) <input type="number" id="userHeight" placeholder="Height" min="80" max="250"></label>
+            <label>Activity Level
+              <select id="userActivity">
+                <option value="1.2">Sedentary</option>
+                <option value="1.375">Light</option>
+                <option value="1.55">Moderate</option>
+                <option value="1.725">Active</option>
+                <option value="1.9">Very Active</option>
+              </select>
+            </label>
+            <label>Goal
+              <select id="userGoal">
+                <option value="maintain">Maintain</option>
+                <option value="bulk">Bulk</option>
+                <option value="cut">Cut</option>
+              </select>
+            </label>
+            <label>Gender
+              <select id="userGender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </label>
+            <button type="button" class="cta-btn" onclick="saveProfile();calculateCalories();">Save & Calculate</button>
+          </form>
+          <div id="profile-summary" style="margin-top:2rem;font-size:1.15rem;"></div>
+          <div id="calorie-result" style="margin-top:2rem;font-size:1.18rem;font-weight:600;color:var(--accent2);"></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="calorie">
+      <div class="section-title">Calorie Tracker</div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Track Your Calories</h3>
+          <div class="card-details">Log your meals and snacks. See your daily intake and stay on target for your goals.</div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="nutrition">
+      <div class="section-title">Nutrition & Meal Planning</div>
+      <div class="card-grid" style="flex-wrap:wrap;gap:2.5rem;justify-content:center;">
+        <div class="card" style="max-width:520px;min-width:260px;flex:2 1 340px;">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Healthy Meal" style="width:100%;max-width:480px;border-radius:18px;margin-bottom:1.5rem;object-fit:cover;aspect-ratio:4/3;">
+          <h3 style="font-size:1.5rem;margin-bottom:1rem;">Smart Meal Plans</h3>
+          <div class="card-details" style="font-size:1.18rem;">Personalized meal plans to fuel your goals. Balanced, delicious, and easy to follow. Includes macronutrient breakdowns, shopping lists, and meal prep tips for every lifestyle.</div>
+          <ul style="text-align:left;font-size:1.08rem;margin:1.2rem 0 0 0;padding-left:1.2rem;color:#b0b8c1;">
+            <li>✔️ Weekly meal suggestions</li>
+            <li>✔️ Macronutrient breakdown (protein, carbs, fats)</li>
+            <li>✔️ Grocery shopping lists</li>
+            <li>✔️ Meal prep and storage tips</li>
+            <li>✔️ Vegetarian, vegan, and high-protein options</li>
+          </ul>
+        </div>
+        <div class="card" style="max-width:420px;min-width:220px;flex:1 1 220px;">
+          <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Recipe" style="width:100%;max-width:380px;border-radius:18px;margin-bottom:1.2rem;object-fit:cover;aspect-ratio:4/3;">
+          <h3 style="font-size:1.2rem;margin-bottom:0.7rem;">Popular Recipes</h3>
+          <div class="card-details">Try these delicious, healthy recipes:</div>
+          <ul style="text-align:left;font-size:1.05rem;margin:0 0 0 0.7rem;padding-left:1.2rem;color:#b0b8c1;">
+            <li>Springfield Power Smoothie</li>
+            <li>Grilled Chicken & Quinoa Bowl</li>
+            <li>Vegan Buddha Bowl</li>
+            <li>Overnight Oats with Berries</li>
+            <li>Salmon & Avocado Salad</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="info">
+      <div class="section-title">Info & Newsletter</div>
+      <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:3.5rem;justify-content:space-between;align-items:flex-start;">
+        <div style="flex:2 1 420px;min-width:320px;">
+          <h2 style="font-size:2.3rem;font-weight:900;margin-bottom:1.2rem;">Get our wellness newsletter</h2>
+          <p style="font-size:1.18rem;max-width:520px;margin-bottom:1.5rem;">Filter out the noise and nurture your inbox with health and wellness advice that’s inclusive and rooted in medical expertise. Get exclusive tips, recipes, and science-backed articles every week.</p>
+          <form style="display:flex;gap:0;max-width:420px;margin-bottom:1.2rem;">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">SIGN UP</button>
+          </form>
+          <div style="font-size:1.05rem;color:#b0b8c1;margin-bottom:2rem;">Your <a href="#" style="color:var(--accent);">privacy</a> is important to us. Unsubscribe anytime.</div>
+          <div style="margin-top:2rem;display:flex;gap:1.2rem;align-items:center;">
+            <a href="#" title="Facebook" style="color:var(--accent);font-size:1.7rem;"><span>📘</span></a>
+            <a href="#" title="Twitter" style="color:var(--accent);font-size:1.7rem;"><span>🐦</span></a>
+            <a href="#" title="Instagram" style="color:var(--accent);font-size:1.7rem;"><span>📸</span></a>
+            <a href="#" title="YouTube" style="color:var(--accent);font-size:1.7rem;"><span>▶️</span></a>
+            <a href="#" title="Pinterest" style="color:var(--accent);font-size:1.7rem;"><span>📌</span></a>
+          </div>
+        </div>
+        <div style="flex:1 1 320px;min-width:260px;">
+          <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:1.2rem;">Quick Links</h3>
+          <ul style="list-style:none;padding:0;margin:0 0 1.5rem 0;font-size:1.08rem;">
+            <li style="margin-bottom:0.7rem;"><a href="#about" style="color:var(--accent);text-decoration:none;font-weight:700;">About Us</a></li>
+            <li style="margin-bottom:0.7rem;"><a href="#contact" style="color:var(--accent);text-decoration:none;font-weight:700;">Contact Us</a></li>
+            <li style="margin-bottom:0.7rem;"><a href="#privacy" style="color:var(--accent);text-decoration:none;font-weight:700;">Privacy Policy</a></li>
+            <li style="margin-bottom:0.7rem;"><a href="#settings" style="color:var(--accent);text-decoration:none;font-weight:700;">Privacy Settings</a></li>
+            <li style="margin-bottom:0.7rem;"><a href="#newsletters" style="color:var(--accent);text-decoration:none;font-weight:700;">Newsletters</a></li>
+            <li style="margin-bottom:0.7rem;"><a href="#healthtopics" style="color:var(--accent);text-decoration:none;font-weight:700;">Health Topics</a></li>
+          </ul>
+          <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:1.2rem;">Featured Articles</h3>
+          <ul style="list-style:disc inside;font-size:1.05rem;color:#b0b8c1;">
+            <li><b>How to Build Healthy Habits</b> – Simple steps for lasting change</li>
+            <li><b>Top 10 Superfoods for 2025</b> – Boost your nutrition</li>
+            <li><b>Understanding Macros</b> – Protein, carbs, and fats explained</li>
+            <li><b>Meal Prep 101</b> – Save time and eat better</li>
+            <li><b>Fitness for Busy People</b> – Quick routines that work</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:3.5rem;background:#111216;color:#fff;padding:2.5rem 0 1.5rem 0;text-align:center;border-radius:0 0 var(--radius) var(--radius);">
+        <div style="font-size:2.2rem;font-weight:900;letter-spacing:2px;margin-bottom:0.7rem;">Vitruva Media</div>
+        <div style="font-size:1.1rem;opacity:0.8;">© 2025 Vitruva Media. All rights reserved. For informational purposes only. Not medical advice.</div>
+        <div style="margin-top:1.2rem;font-size:1.05rem;opacity:0.7;">Our Brands: Vitruva | FitSphere | HealthPro | NutriLife</div>
+      </div>
+    </section>
+  </div>
+  <!-- Removed chatbot -->
+  <script>
+    // Dark mode toggle
+    const toggleDark = document.getElementById('toggleDark');
+    const body = document.body;
+    toggleDark.onclick = function() {
+      body.classList.toggle('light');
+      localStorage.setItem('fitSphereLight', body.classList.contains('light'));
+    };
+    if (localStorage.getItem('fitSphereLight') === 'true') {
+      body.classList.add('light');
+    }
+    // Animated stats
+    function animateStat(id, end, duration = 1200) {
+      const el = document.getElementById(id);
+      let start = 0;
+      if (!el) return;
+      const step = Math.ceil(end / (duration / 16));
+      function update() {
+        start += step;
+        if (start >= end) { el.textContent = end; return; }
+        el.textContent = start;
+        requestAnimationFrame(update);
+      }
+      update();
+    }
+    animateStat('steps', 10432);
+    animateStat('calories', 563);
+    animateStat('weight', 68);
+    // Profile save/load logic
+    function saveProfile() {
+      const name = document.getElementById('userName').value.trim();
+      const age = document.getElementById('userAge').value.trim();
+      const weight = document.getElementById('userWeight').value.trim();
+      const height = document.getElementById('userHeight').value.trim();
+      const goal = document.getElementById('userGoal').value.trim();
+      const activity = document.getElementById('userActivity').value.trim();
+      const gender = document.getElementById('userGender').value.trim();
+      const summary = document.getElementById('profile-summary');
+      if (name && age && weight && height && goal && activity && gender) {
+        localStorage.setItem('profile', JSON.stringify({ name, age, weight, height, goal, activity, gender }));
+        summary.innerHTML = `<b>Name:</b> ${name}<br><b>Age:</b> ${age}<br><b>Weight:</b> ${weight} kg<br><b>Height:</b> ${height} cm<br><b>Goal:</b> ${goal}<br><b>Activity Level:</b> ${activity}<br><b>Gender:</b> ${gender}`;
+      } else {
+        summary.innerHTML = '<span style="color:#f55">Please fill in all fields.</span>';
+      }
+    }
+    function loadProfile() {
+      const data = localStorage.getItem('profile');
+      if (!data) return;
+      const { name, age, weight, height, goal, activity, gender } = JSON.parse(data);
+      document.getElementById('userName').value = name;
+      document.getElementById('userAge').value = age;
+      document.getElementById('userWeight').value = weight;
+      document.getElementById('userHeight').value = height;
+      document.getElementById('userGoal').value = goal;
+      document.getElementById('userActivity').value = activity;
+      document.getElementById('userGender').value = gender;
+      document.getElementById('profile-summary').innerHTML = `<b>Name:</b> ${name}<br><b>Age:</b> ${age}<br><b>Weight:</b> ${weight} kg<br><b>Height:</b> ${height} cm<br><b>Goal:</b> ${goal}<br><b>Activity Level:</b> ${activity}<br><b>Gender:</b> ${gender}`;
+    }
+    function resetProfile() {
+      localStorage.removeItem('profile');
+      document.getElementById('userName').value = '';
+      document.getElementById('userAge').value = '';
+      document.getElementById('userWeight').value = '';
+      document.getElementById('userHeight').value = '';
+      document.getElementById('userGoal').value = '';
+      document.getElementById('userActivity').value = '';
+      document.getElementById('userGender').value = '';
+      document.getElementById('profile-summary').innerHTML = '';
+    }
+    // Calorie calculator
+    function calculateCalories() {
+      const weight = parseFloat(document.getElementById('userWeight').value);
+      const height = parseFloat(document.getElementById('userHeight').value);
+      const age = parseFloat(document.getElementById('userAge').value);
+      const gender = document.getElementById('userGender').value;
+      const activity = parseFloat(document.getElementById('userActivity').value);
+      const goal = document.getElementById('userGoal').value;
+      const result = document.getElementById('calorie-result');
+      if (!weight || !height || !age || !gender || !activity || !goal) {
+        result.innerHTML = '<span style="color:#f55">Please fill in all fields for calorie calculation.</span>';
+        return;
+      }
+      // Mifflin-St Jeor Equation
+      let bmr = gender === 'male'
+        ? 10 * weight + 6.25 * height - 5 * age + 5
+        : 10 * weight + 6.25 * height - 5 * age - 161;
+      let maintenance = Math.round(bmr * activity);
+      let advice = '';
+      let color = 'var(--accent2)';
+      if (goal === 'bulk') {
+        advice = `To bulk: <b>${maintenance + 300}</b> kcal/day (add ~300 kcal)`;
+        color = '#00ff99';
+      } else if (goal === 'cut') {
+        advice = `To cut: <b>${maintenance - 400}</b> kcal/day (subtract ~400 kcal)`;
+        color = '#ff4d4d';
+      } else {
+        advice = `To maintain: <b>${maintenance}</b> kcal/day`;
+      }
+      result.innerHTML = `<span style="color:${color}">BMR: <b>${Math.round(bmr)}</b> kcal<br>Maintenance: <b>${maintenance}</b> kcal<br>${advice}</span>`;
+    }
+    // Editable Achievements
+    function renderEditableList(listId, storageKey, placeholder) {
+      const container = document.getElementById(listId);
+      let items = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      function render() {
+        container.innerHTML = '';
+        items.forEach((item, idx) => {
+          const li = document.createElement('li');
+          li.innerHTML = `<input type='text' value="${item}" onchange="updateItem('${listId}','${storageKey}',${idx},this.value)" />` +
+            `<button class='delete-btn' onclick="deleteItem('${listId}','${storageKey}',${idx})">✕</button>`;
+          container.appendChild(li);
+        });
+        const addBtn = document.createElement('button');
+        addBtn.className = 'add-btn';
+        addBtn.textContent = `+ Add ${placeholder}`;
+        addBtn.onclick = () => { items.push(''); save(); render(); };
+        container.appendChild(addBtn);
+      }
+      function save() {
+        localStorage.setItem(storageKey, JSON.stringify(items));
+      }
+      window[`updateItem`] = (id, key, idx, val) => {
+        items[idx] = val;
+        save();
+      };
+      window[`deleteItem`] = (id, key, idx) => {
+        items.splice(idx, 1);
+        save();
+        render();
+      };
+      render();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      loadProfile();
+      document.querySelectorAll('.section, .card, .stat-card, .tip-card, .hero').forEach(el => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(60px)';
+      });
+      revealOnScroll();
+      renderEditableList('milestone-list', 'milestones', 'Milestone');
+      renderEditableList('badge-list', 'badges', 'Badge');
+    });
+    // Scroll-based fade-in transitions
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('.section, .card, .stat-card, .tip-card, .hero');
+      const windowHeight = window.innerHeight;
+      reveals.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < windowHeight - 80) {
+          el.style.opacity = 1;
+          el.style.transform = 'translateY(0)';
+          el.style.transition = 'opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)';
+        } else {
+          el.style.opacity = 0;
+          el.style.transform = 'translateY(60px)';
+        }
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    // Add interactivity: animated CTA, newsletter form feedback, nav highlight on scroll
+    // Animated CTA button
+    const ctaBtn = document.querySelector('.cta-btn');
+    if (ctaBtn) {
+      ctaBtn.addEventListener('mouseenter', () => {
+        ctaBtn.style.transform = 'scale(1.07)';
+        ctaBtn.style.boxShadow = '0 4px 24px #2997ff55';
+      });
+      ctaBtn.addEventListener('mouseleave', () => {
+        ctaBtn.style.transform = 'scale(1)';
+        ctaBtn.style.boxShadow = '';
+      });
+      ctaBtn.addEventListener('click', () => {
+        ctaBtn.textContent = 'Welcome!';
+        setTimeout(() => { ctaBtn.textContent = 'Get Started'; }, 1200);
+      });
+    }
+    // Newsletter form feedback
+    const newsletterForm = document.querySelector('#info form');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const input = newsletterForm.querySelector('input[type="email"]');
+        const btn = newsletterForm.querySelector('button[type="submit"]');
+        btn.textContent = 'Signed Up!';
+        btn.style.background = '#00c853';
+        btn.style.color = '#fff';
+        input.disabled = true;
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.textContent = 'SIGN UP';
+          btn.style.background = '';
+          btn.style.color = '';
+          input.disabled = false;
+          btn.disabled = false;
+          input.value = '';
+        }, 2000);
+      });
+    }
+    // Navigation highlight on scroll
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = ['home','profile','calorie','nutrition','info'].map(id => document.getElementById(id));
+    window.addEventListener('scroll', () => {
+      let idx = 0;
+      for (let i = 0; i < sections.length; i++) {
+        if (sections[i] && sections[i].getBoundingClientRect().top - 80 < 0) idx = i;
+      }
+      navLinks.forEach((a, i) => a.classList.toggle('active', i === idx));
+    });
+  </script>
+</body>
+</html>
